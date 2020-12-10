@@ -29,6 +29,7 @@ export default function Layout({
         />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="google-site-verification" content="17Xsm16H08jVq1YOLcTZyRnzWGdIEcdxN1ae7ZLzoI4" />
       </Head>
       <header className={styles.header}>
         {home ? (
