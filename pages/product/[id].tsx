@@ -1,16 +1,19 @@
 import {GetStaticPaths, GetStaticProps} from "next";
 import * as axios from "axios";
+import Layout from "../../components/layout";
 
 export default function Product({products}) {
-    return(
-        <div>
-            <h3>LIST</h3>
-            <ul>{
-                products.map((product, index) => (
-                    <li key={index}>{product.name}</li>
-                ))
-            }</ul>
-        </div>
+    return (
+        <Layout>
+            <div>
+                <h3>LIST</h3>
+                <ul>{
+                    products.map((product, index) => (
+                        <li key={index}>{product.name}</li>
+                    ))
+                }</ul>
+            </div>
+        </Layout>
     )
 }
 
@@ -20,9 +23,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
         url: 'http://eco-be.herokuapp.com/products/get-all/',
     })
     const paths = allProd.data.map(item => {
-       return {
-           params: {id: item.id.toString()}
-       }
+        return {
+            params: {id: item.id.toString()}
+        }
     });
     return {
         paths,
