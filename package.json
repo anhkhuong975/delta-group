@@ -9,12 +9,17 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
+    "date-fns": "^2.11.1",
     "gray-matter": "^4.0.2",
     "next": "^10.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "sass": "^1.30.0",
-    "scss": "^0.2.4",
-    "swr": "^0.3.9"
+    "remark": "^12.0.0",
+    "remark-html": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.0",
+    "@types/react": "^16.9.32",
+    "typescript": "^3.8.3"
   }
 }
