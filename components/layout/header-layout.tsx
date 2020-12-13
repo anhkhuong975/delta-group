@@ -1,9 +1,10 @@
 import React from "react";
 import * as axios from "axios";
+import {HeaderState} from "../../store/header.type";
+import {bindActionCreators, Dispatch} from "redux";
+import {counter, HeaderActions} from "../../store/header.action";
+import {connect} from "react-redux";
 
-interface Props {
-    count?: number,
-}
 interface State {
     count: number,
     totalProducts: number,
@@ -44,11 +45,22 @@ export class HeaderLayout extends React.Component<Props, State> {
         return (
             <div className="header-container">
                 <h3>HEADER</h3>
-                <button onClick={this.counter}>counter</button>
+                <button onClick={this.props.counter}>counter</button>
                 <button onClick={this.getProduct}>get prod</button>
-                <div>Count: <span>{this.state.count}</span></div>
+                <div>Count: <span>{this.props.count}</span></div>
                 <div>Prod name: <span>{this.state.totalProducts}</span></div>
             </div>
         );
     }
 }
+const mapStateToProps = (state: HeaderState) => ({
+    count: state.count
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<HeaderActions>) =>
+    bindActionCreators({ counter }, dispatch);
+
+type Props = ReturnType<typeof mapStateToProps> &
+    ReturnType<typeof mapDispatchToProps>;
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderLayout);

@@ -1,6 +1,8 @@
 import React from "react";
-import {HeaderLayout} from "./header-layout";
+// import {HeaderLayout} from "./header-layout";
 import FooterLayout from "./footer-layout";
+import HeaderLayout from "./header-layout";
+// import HeaderLayout from "./header-layout";
 
 export default class MainLayout extends React.Component<{child?: React.ReactNode}, any> {
     constructor(props) {

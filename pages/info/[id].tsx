@@ -2,6 +2,9 @@ import {GetStaticPaths, GetStaticProps} from "next";
 import * as axios from "axios";
 import React from "react";
 import MainLayout from "../../components/layout/main-layout";
+import {counter, HeaderActions} from "../../store/header.action";
+import {bindActionCreators, Dispatch} from "redux";
+import {connect} from "react-redux";
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const allProd = await axios.default({
@@ -31,7 +34,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
     }
 }
 
-interface Props {
+interface PropsInfo {
     products: any[],
 }
 
@@ -39,7 +42,7 @@ interface State {
     products: any[],
 }
 
-export default class Info extends React.Component<Props, State> {
+class Info extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -96,6 +99,7 @@ export default class Info extends React.Component<Props, State> {
                         <li key={index}>{product.name.split("").reverse().join("")}</li>
                     ))
                 }</ul>
+                <button onClick={this.props.counter}>update header counter</button>
             </div>
         );
         return (
@@ -103,3 +107,11 @@ export default class Info extends React.Component<Props, State> {
         );
     }
 }
+
+
+const mapDispatchToProps = (dispatch: Dispatch<HeaderActions>) =>
+    bindActionCreators({ counter }, dispatch);
+
+type Props = PropsInfo & ReturnType<typeof mapDispatchToProps>;
+
+export default connect(() => {}, mapDispatchToProps)(Info);
