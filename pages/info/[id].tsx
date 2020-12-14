@@ -12,7 +12,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
         method: 'GET',
         url: 'https://eco-be.herokuapp.com/products/get-all/',
     })
-    console.log("IN PATH: ", allProd);
     const paths = allProd.data.map(item => {
         return {
             params: {id: item.id.toString()}
@@ -33,7 +32,8 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
     return {
         props: {
             products: res.data,
-        }
+        },
+        revalidate: 60
     }
 }
 
