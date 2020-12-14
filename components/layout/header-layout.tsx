@@ -4,6 +4,8 @@ import {HeaderState} from "../../store/header.type";
 import {bindActionCreators, Dispatch} from "redux";
 import {counter, HeaderActions} from "../../store/header.action";
 import {connect} from "react-redux";
+import Head from "next/head";
+import {siteTitle} from "../layout";
 
 interface State {
     count: number,
@@ -44,6 +46,10 @@ export class HeaderLayout extends React.Component<Props, State> {
     render() {
         return (
             <div className="header-container">
+                <Head>
+                    <title>{siteTitle}</title>
+                    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
+                </Head>
                 <h3>HEADER</h3>
                 <button onClick={this.props.counter}>counter</button>
                 <button onClick={this.getProduct}>get prod</button>

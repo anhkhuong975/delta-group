@@ -10,7 +10,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     console.debug("============> in get static paths");
     const allProd = await axios.default({
         method: 'GET',
-        url: 'http://eco-be.herokuapp.com/products/get-all/',
+        url: 'https://eco-be.herokuapp.com/products/get-all/',
     })
     console.log("IN PATH: ", allProd);
     const paths = allProd.data.map(item => {
@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
     console.debug("=================> get static props");
     const res = await axios.default({
         method: 'GET',
-        url: 'http://eco-be.herokuapp.com/products/get-one/' + params.id,
+        url: 'https://eco-be.herokuapp.com/products/get-one/' + params.id,
     })
     return {
         props: {
