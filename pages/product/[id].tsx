@@ -1,8 +1,15 @@
 import {GetStaticPaths, GetStaticProps} from "next";
 import * as axios from "axios";
 import Layout from "../../components/layout";
+import {useRouter} from "next/router";
 
 export default function Product({products}) {
+    const router = useRouter();
+
+    if (router.isFallback) {
+        // your loading indicator
+        return <div>loading...</div>
+    }
     return (
         <Layout>
             <div>
@@ -35,7 +42,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
     const res = await axios.default({
-        method: 'get',
+        method: 'GET',
         url: 'http://eco-be.herokuapp.com/products/get-one/' + params.id,
     })
     return {
