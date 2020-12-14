@@ -7,6 +7,7 @@ import {bindActionCreators, Dispatch} from "redux";
 import {connect} from "react-redux";
 
 export const getStaticPaths: GetStaticPaths = async () => {
+    console.debug("============> in get static paths");
     const allProd = await axios.default({
         method: 'GET',
         url: 'http://eco-be.herokuapp.com/products/get-all/',
@@ -23,8 +24,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
+    console.debug("=================> get static props");
     const res = await axios.default({
-        method: 'get',
+        method: 'GET',
         url: 'http://eco-be.herokuapp.com/products/get-one/' + params.id,
     })
     return {
@@ -73,7 +75,7 @@ class Info extends React.Component<Props, State> {
      * @return void
      */
     componentDidMount() {
-        console.log("component did mount");
+        console.debug("component did mount");
     }
 
     /**
