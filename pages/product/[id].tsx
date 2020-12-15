@@ -7,7 +7,6 @@ export default function Product({products}) {
     const router = useRouter();
 
     if (router.isFallback) {
-        // your loading indicator
         return <div>loading...</div>
     }
     return (
@@ -16,7 +15,7 @@ export default function Product({products}) {
                 <h3>LIST</h3>
                 <ul>{
                     products.map((product, index) => (
-                        <li key={index}>{product.name}</li>
+                        <li key={index}>{product.name.split("").reverse().join("")}</li>
                     ))
                 }</ul>
             </div>
@@ -34,6 +33,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
             params: {id: item.id.toString()}
         }
     });
+    console.debug("==================> in get static PATHS: ", allProd.data.length);
     return {
         paths,
         fallback: true,
@@ -45,9 +45,12 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
         method: 'GET',
         url: 'http://eco-be.herokuapp.com/products/get-one/' + params.id,
     })
+    console.debug("=================> get static PROPS: ", params.id);
+
     return {
         props: {
             products: res.data,
-        }
+        },
+        revalidate: 5
     }
 }
