@@ -2,12 +2,17 @@ import {GetStaticPaths, GetStaticProps} from "next";
 import * as axios from "axios";
 import Layout from "../../components/layout";
 import {useRouter} from "next/router";
+import ErrorPage from 'next/error'
+import Error from '../Error';
 
 export default function Product({products}) {
     const router = useRouter();
-
     if (router.isFallback) {
         return <div>loading...</div>
+    }
+    if (!products[0]) {
+        console.log("IN ERROR PAGE")
+        return <ErrorPage statusCode={404} />
     }
     return (
         <Layout>
@@ -33,7 +38,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
             params: {id: item.id.toString()}
         }
     });
-    console.debug("==================> in get static PATHS: ", allProd.data.length);
     return {
         paths,
         fallback: true,
@@ -45,8 +49,6 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
         method: 'GET',
         url: 'http://eco-be.herokuapp.com/products/get-one/' + params.id,
     })
-    console.debug("=================> get static PROPS: ", params.id);
-
     return {
         props: {
             products: res.data,
