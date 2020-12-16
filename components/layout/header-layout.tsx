@@ -53,6 +53,7 @@ export class HeaderLayout extends React.Component<Props, State> {
                 <h3>HEADER</h3>
                 <button onClick={this.props.counter}>counter</button>
                 <button onClick={this.getProduct}>get prod</button>
+                {/*<button onClick={this.getAPI}>get api</button>*/}
                 <div>Count: <span>{this.props.count}</span></div>
                 <div>Prod name: <span>{this.state.totalProducts}</span></div>
             </div>

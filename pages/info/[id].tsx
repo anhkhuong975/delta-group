@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {useRouter} from "next/router";
 import ErrorPage from "next/error";
 
+let bodyCounter: number = 0;
 export const getStaticPaths: GetStaticPaths = async () => {
     const allProd = await axios.default({
         method: 'GET',
@@ -43,6 +44,10 @@ interface PropsInfo {
     products: any[],
 }
 
+function onClickUpdateBodyCounter() {
+    bodyCounter = bodyCounter + 1;
+}
+
 export function Info(props: Props){
     const router = useRouter();
     if (router.isFallback) {
@@ -61,6 +66,10 @@ export function Info(props: Props){
                 ))
             }</ul>
             <button onClick={props.counter}>update header counter</button>
+            <div>
+                <button onClick={onClickUpdateBodyCounter}>update body counter</button>
+                <div>Body counter: <span>{bodyCounter}</span></div>
+            </div>
         </div>
     );
     return (<MainLayout child={elem}/>);
