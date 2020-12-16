@@ -77,9 +77,7 @@ export class Info extends React.Component<Props, State>{
      * @return object state
      */
     static getDerivedStateFromProps(props: Props, state: State) {
-        return {
-            bodyCount: 0,
-        }
+        return state
     }
 
     /**
