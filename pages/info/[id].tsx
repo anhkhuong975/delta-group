@@ -5,8 +5,8 @@ import MainLayout from "../../components/layout/main-layout";
 import {counter, HeaderActions} from "../../store/header.action";
 import {bindActionCreators, Dispatch} from "redux";
 import {connect} from "react-redux";
-import {useRouter} from "next/router";
 import ErrorPage from "next/error";
+import { withRouter } from 'next/router';
 
 let bodyCounter: number = 0;
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -42,37 +42,92 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
 
 interface PropsInfo {
     products: any[],
+    router: any,
 }
 
-function onClickUpdateBodyCounter() {
-    bodyCounter = bodyCounter + 1;
+interface State {
+    bodyCount: number
 }
 
-export function Info(props: Props){
-    const router = useRouter();
-    if (router.isFallback) {
-        return <div>loading...</div>
+export class Info extends React.Component<Props, State>{
+    // const router = useRouter();
+    constructor(props) {
+        super(props);
+        this.state = {
+            bodyCount: 0,
+        }
+        this.onClickUpdateBodyCounter = this.onClickUpdateBodyCounter.bind(this);
     }
-    if (!props.products[0]) {
-        console.log("IN ERROR PAGE")
-        return <ErrorPage statusCode={404} />
+
+
+    onClickUpdateBodyCounter() {
+        this.setState({
+            bodyCount: this.state.bodyCount + 1
+        })
     }
-    const elem = (
-        <div className='info-container'>
-            <h1>INFO</h1>
-            <ul>{
-                props.products.map((product, index) => (
-                    <li key={index}>{product.name.split("").reverse().join("")}</li>
-                ))
-            }</ul>
-            <button onClick={props.counter}>update header counter</button>
-            <div>
-                <button onClick={onClickUpdateBodyCounter}>update body counter</button>
-                <div>Body counter: <span>{bodyCounter}</span></div>
+
+
+    /**
+     * INIT && UPDATED
+     * @description this function use after init, and before render
+     *
+     * @param props
+     * @param state
+     *
+     * @return object state
+     */
+    static getDerivedStateFromProps(props: Props, state: State) {
+        return {
+            bodyCount: 0,
+        }
+    }
+
+    /**
+     * INIT
+     * @description this function use after render
+     * process data
+     *
+     * @return void
+     */
+    componentDidMount() {
+    }
+
+    /**
+     * UPDATE
+     * @description this function use after update
+     *
+     */
+    componentDidUpdate() {
+    }
+
+    /**
+     * @description render to html and js
+     */
+    render() {
+        if (this.props.router.isFallback) {
+            return <div>loading...</div>
+        }
+        if (!this.props.products[0]) {
+            console.log("IN ERROR PAGE")
+            return <ErrorPage statusCode={404} />
+        }
+        const elem = (
+            <div className='info-container'>
+                <h1>INFO</h1>
+                <ul>{
+                    this.props.products.map((product, index) => (
+                        <li key={index}>{product.name.split("").reverse().join("")}</li>
+                    ))
+                }</ul>
+                <button onClick={this.props.counter}>update header counter</button>
+                <div>
+                    <button onClick={this.onClickUpdateBodyCounter}>update body counter</button>
+                    <div>Body counter: <span>{this.state.bodyCount}</span></div>
+                </div>
             </div>
-        </div>
-    );
-    return (<MainLayout child={elem}/>);
+        );
+        return (<MainLayout child={elem}/>);
+    }
 }
 
 
@@ -81,4 +136,4 @@ const mapDispatchToProps = (dispatch: Dispatch<HeaderActions>) =>
 
 type Props = PropsInfo & ReturnType<typeof mapDispatchToProps>;
 
-export default connect(() => {}, mapDispatchToProps)(Info);
+export default connect(() => {return {}}, mapDispatchToProps)(withRouter(Info));
