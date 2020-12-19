@@ -32,6 +32,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const allProd = await axios.default({
         method: 'GET',
         url: 'http://eco-be.herokuapp.com/products/get-all/',
+        headers: {"Access-Control-Allow-Origin": "*"}
     })
     const paths = allProd.data.map(item => {
         return {
