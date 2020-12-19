@@ -10,8 +10,8 @@ export const HEADER_TITLE = {
     tetAm: "Bao nhiêu ngày đến tết âm lịch"
 };
 export const URL = {
-    // getDatetime: "https://delta-group.tk/api/get-time",
-    getDatetime: "http://localhost:3000/api/get-time",
+    getDatetime: "https://delta-group.tk/api/get-time",
+    // getDatetime: "http://localhost:3000/api/get-time",
 }
 export const CONFIG_DATA = {
     ngayLuong: 5,
