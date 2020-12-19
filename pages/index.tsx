@@ -6,6 +6,10 @@ import Link from 'next/link'
 import Date from '../components/date'
 import { GetStaticProps } from 'next'
 
+export const HEADER_TITLE = {
+  luong: "Bao nhiêu ngày đến lương",
+};
+
 export default function Home({
   allPostsData
 }: {
@@ -16,34 +20,31 @@ export default function Home({
   }[]
 }) {
   return (
-    <Layout home>
+    <div className="home-component">
       <Head>
-        <title>{siteTitle}</title>
+        <title>DETA - GROUP</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
       </Head>
-      <section className={utilStyles.headingMd}>
-        <p>[Your Self Introduction]</p>
-        <p>
-          (This is a sample website - you’ll be building a site like this in{' '}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-        </p>
-      </section>
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>
-                <a>{title}</a>
-              </Link>
-              <br />
-              <small className={utilStyles.lightText}>
-                <Date dateString={date} />
-              </small>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </Layout>
+      <div className="body">
+        <div className="row pt-3">
+          <div className="col-lg-12 d-flex justify-content-center">
+            <div className="card border-light mb-3 counter-wrap" style={{maxWidth: '18rem'}}>
+              <div className="card-header p-1 text-white text-center bg-warning">{HEADER_TITLE.luong}</div>
+
+              <div className="card-body text-info text-center">
+                <div className="counter-number">12 : 13 : 13</div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+    </div>
   )
 }
 
