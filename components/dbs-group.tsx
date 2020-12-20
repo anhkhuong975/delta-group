@@ -4,6 +4,8 @@ import * as axios from "axios";
 import Countdown from "react-countdown";
 import {ClipLoader, ClockLoader} from "react-spinners";
 import {css} from "@emotion/core";
+import ReactGA from 'react-ga';
+
 
 export const HEADER_TITLE = {
     luong: "Bao nhiêu ngày nửa có lương",
@@ -75,6 +77,8 @@ export class DbsGroup extends React.Component<Props, State> {
      * @return void
      */
     async componentDidMount() {
+        ReactGA.initialize('G-6QKVW0QB9Z');
+        ReactGA.pageview(window.location.pathname + window.location.search);
         const res = await axios.default({
             method: 'GET',
             url: URL.getDatetime,
