@@ -143,16 +143,22 @@ export class DbsGroup extends React.Component<Props, State> {
                         name="description"
                         content="DBS ngày đến lương, ngày đến tết, ngày được nghĩ, ngày đi chơi, ..."
                     />
-                    <meta property="og:url" content="https://delta-group.tk/" />
-                    <meta property="og:type" content="article" />
-                    <meta property="og:title" content="DELTA - GROUP" />
-                    <meta property="og:description" content="DBS ngày đến lương, ngày đến tết, ngày được nghĩ, ngày đi chơi, ..." />
-                    <meta property="og:image" content="/crab-icon.png" />
+                    <meta property="og:url" content="https://delta-group.tk/"/>
+                    <meta property="og:type" content="article"/>
+                    <meta property="og:title" content="DELTA - GROUP"/>
+                    <meta property="og:description"
+                          content="DBS ngày đến lương, ngày đến tết, ngày được nghĩ, ngày đi chơi, ..."/>
+                    <meta property="og:image" content="/crab-icon.png"/>
                     {/*<img src="/crab-icon.png" alt="DBS ngày đến lương, ngày đến tết, ngày được nghĩ, ngày đi chơi, ..."/>*/}
-                    <meta name="twitter:card" content="summary_large_image" />
+                    <meta name="twitter:card" content="summary_large_image"/>
                     <script
                         dangerouslySetInnerHTML={{
-                            __html: `G-6QKVW0QB9Z`
+                            __html: `
+                                window.dataLayer = window.dataLayer || [];
+                                function gtag(){dataLayer.push(arguments);}
+                                gtag('js', new Date());
+                                gtag('config', 'G-6QKVW0QB9Z');
+                            `,
                         }}
                     />
                 </Head>
@@ -190,7 +196,8 @@ export class DbsGroup extends React.Component<Props, State> {
                                             loading={true}
                                         /> :
                                         <div className="card-body text-info text-center">
-                                            <div className="counter-number">{this.state.nextLuong} <span>ngày</span></div>
+                                            <div className="counter-number">{this.state.nextLuong} <span>ngày</span>
+                                            </div>
                                         </div>
                                 }
                             </div>
@@ -209,7 +216,8 @@ export class DbsGroup extends React.Component<Props, State> {
                                             loading={true}
                                         /> :
                                         <div className="card-body text-info text-center">
-                                            <div className="counter-number">{this.state.nextTetDuong} <span>ngày</span></div>
+                                            <div className="counter-number">{this.state.nextTetDuong} <span>ngày</span>
+                                            </div>
                                         </div>
                                 }
                             </div>
@@ -228,7 +236,8 @@ export class DbsGroup extends React.Component<Props, State> {
                                             loading={true}
                                         /> :
                                         <div className="card-body text-info text-center">
-                                            <div className="counter-number">{this.state.nextTetAm} <span>ngày</span></div>
+                                            <div className="counter-number">{this.state.nextTetAm} <span>ngày</span>
+                                            </div>
                                         </div>
                                 }
                             </div>
