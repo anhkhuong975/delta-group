@@ -1,10 +1,8 @@
 import Head from "next/head";
 import React from "react";
 import * as axios from "axios";
-import Countdown from "react-countdown";
-import {ClipLoader, ClockLoader} from "react-spinners";
+import {ClockLoader} from "react-spinners";
 import {css} from "@emotion/core";
-import ReactGA from 'react-ga';
 
 
 export const HEADER_TITLE = {
@@ -131,7 +129,6 @@ export class DbsGroup extends React.Component<Props, State> {
      * @description render to html and js
      */
     render() {
-        console.log(this.state)
         const nextLuong = Number(this.state.nextLuong);
         return (
             <div className="home-component">
