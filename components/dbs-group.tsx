@@ -137,13 +137,15 @@ export class DbsGroup extends React.Component<Props, State> {
                     <link rel="icon" href="/crab-icon.ico"/>
                     <meta
                         name="description"
-                        content="Count date down for delta-group"
+                        content="DBS ngày đến lương, ngày đến tết, ngày được nghĩ, ngày đi chơi, ..."
                     />
                     <meta property="og:url" content="https://delta-group.tk/" />
                     <meta property="og:type" content="article" />
                     <meta property="og:title" content="DELTA - GROUP" />
                     <meta property="og:description" content="DBS ngày đến lương, ngày đến tết, ngày được nghĩ, ngày đi chơi, ..." />
                     <meta property="og:image" content="/crab-icon.png" />
+                    {/*<img src="/crab-icon.png" alt="DBS ngày đến lương, ngày đến tết, ngày được nghĩ, ngày đi chơi, ..."/>*/}
+                    <meta name="twitter:card" content="summary_large_image" />
                 </Head>
                 <div className="body">
                     <div className="row pt-3 m-0">
