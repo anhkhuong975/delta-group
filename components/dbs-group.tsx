@@ -6,7 +6,7 @@ import {css} from "@emotion/core";
 
 
 export const HEADER_TITLE = {
-    luong: "Bao nhiêu ngày nửa có lương",
+    luong: "Bao nhiêu ngày nữa có lương",
     today: "Ngày hôm nay",
     tetDuong: "Bao nhiêu ngày đến tết dương",
     tetAm: "Bao nhiêu ngày đến tết âm lịch"
