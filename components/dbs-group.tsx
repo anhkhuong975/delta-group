@@ -150,6 +150,11 @@ export class DbsGroup extends React.Component<Props, State> {
                     <meta property="og:image" content="/crab-icon.png" />
                     {/*<img src="/crab-icon.png" alt="DBS ngày đến lương, ngày đến tết, ngày được nghĩ, ngày đi chơi, ..."/>*/}
                     <meta name="twitter:card" content="summary_large_image" />
+                    <script
+                        dangerouslySetInnerHTML={{
+                            __html: `G-6QKVW0QB9Z`
+                        }}
+                    />
                 </Head>
                 <div className="body">
                     <div className="row pt-3 m-0">
