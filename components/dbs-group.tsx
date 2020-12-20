@@ -2,6 +2,8 @@ import Head from "next/head";
 import React from "react";
 import * as axios from "axios";
 import Countdown from "react-countdown";
+import {ClipLoader, ClockLoader} from "react-spinners";
+import {css} from "@emotion/core";
 
 export const HEADER_TITLE = {
     luong: "Bao nhiêu ngày nửa có lương",
@@ -15,9 +17,16 @@ export const URL = {
 }
 export const CONFIG_DATA = {
     ngayLuong: 5,
-    nextTetAm: new Date(2021, 2, 12)
+    nextTetAm: new Date(2021, 1, 11)
 }
 
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  transform: translateY(50%);
+  background-color: rgba(255, 255, 255, 0.5);
+`;
 
 interface Props {
 }
@@ -30,6 +39,7 @@ interface State {
     nextTetDuong: number;
     nextTetAm: number;
 }
+
 export class DbsGroup extends React.Component<Props, State> {
     constructor(props) {
         super(props);
@@ -89,18 +99,18 @@ export class DbsGroup extends React.Component<Props, State> {
                 5)
             const nextLuongMili = nextLuong.getTime() - this.state.datetime.getTime();
 
-            const nextTetDuong = new Date (
+            const nextTetDuong = new Date(
                 this.state.datetime.getFullYear() + 1,
-                1,1
+                0, 0
             )
             const nextTetDuongMili = nextTetDuong.getTime() - this.state.datetime.getTime();
 
-            const nextTetAmMili = CONFIG_DATA.nextTetAm.getTime()  - this.state.datetime.getTime();
+            const nextTetAmMili = CONFIG_DATA.nextTetAm.getTime() - this.state.datetime.getTime();
 
             this.setState({
-                nextLuong: Math.ceil(nextLuongMili/1000/60/60/24),
-                nextTetDuong: Math.ceil(nextTetDuongMili/1000/60/60/24),
-                nextTetAm: Math.ceil(nextTetAmMili/1000/60/60/24),
+                nextLuong: Math.ceil(nextLuongMili / 1000 / 60 / 60 / 24),
+                nextTetDuong: Math.ceil(nextTetDuongMili / 1000 / 60 / 60 / 24),
+                nextTetAm: Math.ceil(nextTetAmMili / 1000 / 60 / 60 / 24),
             })
         }
     }
@@ -124,11 +134,16 @@ export class DbsGroup extends React.Component<Props, State> {
                 <Head>
                     <title>DELTA - GROUP</title>
                     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                    <link rel="icon" href="/favicon.ico" />
+                    <link rel="icon" href="/crab-icon.ico"/>
                     <meta
                         name="description"
                         content="Count date down for delta-group"
                     />
+                    <meta property="og:url" content="https://delta-group.tk/" />
+                    <meta property="og:type" content="article" />
+                    <meta property="og:title" content="DELTA - GROUP" />
+                    <meta property="og:description" content="DBS ngày đến lương, ngày đến tết, ngày được nghĩ, ngày đi chơi, ..." />
+                    <meta property="og:image" content="/crab-icon.png" />
                 </Head>
                 <div className="body">
                     <div className="row pt-3 m-0">
@@ -136,10 +151,18 @@ export class DbsGroup extends React.Component<Props, State> {
                             <div className="card border-light mb-3 counter-wrap" style={{maxWidth: '18rem'}}>
                                 <div
                                     className="card-header p-1 text-white text-center bg-warning">{HEADER_TITLE.today}</div>
-
-                                <div className="card-body text-info text-center">
-                                    <div className="counter-number">{this.state.current}</div>
-                                </div>
+                                {
+                                    !this.state.current ?
+                                        <ClockLoader
+                                            css={override}
+                                            size={50}
+                                            color={"#880088"}
+                                            loading={true}
+                                        /> :
+                                        <div className="card-body text-info text-center">
+                                            <div className="counter-number">{this.state.current}</div>
+                                        </div>
+                                }
                             </div>
                         </div>
 
@@ -147,12 +170,18 @@ export class DbsGroup extends React.Component<Props, State> {
                             <div className="card border-light mb-3 counter-wrap" style={{maxWidth: '18rem'}}>
                                 <div
                                     className="card-header p-1 text-white text-center bg-warning">{HEADER_TITLE.luong}</div>
-
-                                <div className="card-body text-info text-center">
-                                    <div className="counter-number">
-                                        {this.state.nextLuong} <span>ngày</span>
-                                    </div>
-                                </div>
+                                {
+                                    !this.state.current ?
+                                        <ClockLoader
+                                            css={override}
+                                            size={50}
+                                            color={"#880088"}
+                                            loading={true}
+                                        /> :
+                                        <div className="card-body text-info text-center">
+                                            <div className="counter-number">{this.state.nextLuong} <span>ngày</span></div>
+                                        </div>
+                                }
                             </div>
                         </div>
 
@@ -160,12 +189,18 @@ export class DbsGroup extends React.Component<Props, State> {
                             <div className="card border-light mb-3 counter-wrap" style={{maxWidth: '18rem'}}>
                                 <div
                                     className="card-header p-1 text-white text-center bg-warning">{HEADER_TITLE.tetDuong}</div>
-
-                                <div className="card-body text-info text-center">
-                                    <div className="counter-number">
-                                        {this.state.nextTetDuong} <span>ngày</span>
-                                    </div>
-                                </div>
+                                {
+                                    !this.state.current ?
+                                        <ClockLoader
+                                            css={override}
+                                            size={50}
+                                            color={"#880088"}
+                                            loading={true}
+                                        /> :
+                                        <div className="card-body text-info text-center">
+                                            <div className="counter-number">{this.state.nextTetDuong} <span>ngày</span></div>
+                                        </div>
+                                }
                             </div>
                         </div>
 
@@ -173,12 +208,18 @@ export class DbsGroup extends React.Component<Props, State> {
                             <div className="card border-light mb-3 counter-wrap" style={{maxWidth: '18rem'}}>
                                 <div
                                     className="card-header p-1 text-white text-center bg-warning">{HEADER_TITLE.tetAm}</div>
-
-                                <div className="card-body text-info text-center">
-                                    <div className="counter-number">
-                                        {this.state.nextTetAm} <span>ngày</span>
-                                    </div>
-                                </div>
+                                {
+                                    !this.state.current ?
+                                        <ClockLoader
+                                            css={override}
+                                            size={50}
+                                            color={"#880088"}
+                                            loading={true}
+                                        /> :
+                                        <div className="card-body text-info text-center">
+                                            <div className="counter-number">{this.state.nextTetAm} <span>ngày</span></div>
+                                        </div>
+                                }
                             </div>
                         </div>
 
