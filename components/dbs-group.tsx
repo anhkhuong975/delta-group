@@ -89,7 +89,7 @@ export class DbsGroup extends React.Component<Props, State> {
         if (res) {
             this.setState({
                 datetime: new Date(res.data.datetime),
-                current: new Date(res.data.datetime).toDateString(),
+                current: new Date(res.data.datetime).toLocaleDateString(),
             })
             const nowMonth = this.state.datetime.getMonth();
             const nextLuongMonth = nowMonth + 1 > 12 ?
