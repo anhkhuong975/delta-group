@@ -164,7 +164,10 @@ export class DbsGroup extends React.Component<Props, State> {
                                             loading={true}
                                         /> :
                                         <div className="card-body text-info text-center">
-                                            <div className="counter-number">{this.state.current}</div>
+                                            {/*<div className="counter-number">{this.state.current}</div>*/}
+                                            <div className="counter-number">
+                                                Ngày <span>{this.state.datetime.getDate()}</span> tháng <span>{this.state.datetime.getMonth()}</span> năm <span>{this.state.datetime.getFullYear()}</span>
+                                            </div>
                                         </div>
                                 }
                             </div>
