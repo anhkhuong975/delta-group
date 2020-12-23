@@ -1,13 +1,9 @@
-import { getSortedPostsData } from '../lib/posts'
-import { GetStaticProps } from 'next'
 import {DbsGroup} from "../components/dbs-group";
 import React from "react";
 import Head from 'next/head';
 
 
-export default function Home({
-  allPostsData
-}: {
+export default function Home({}: {
   allPostsData: {
     date: string
     title: string
@@ -31,15 +27,5 @@ export default function Home({
         </Head>
         <DbsGroup/>
       </div>
-
   )
-}
-
-export const getStaticProps: GetStaticProps = async () => {
-  const allPostsData = getSortedPostsData()
-  return {
-    props: {
-      allPostsData
-    }
-  }
 }

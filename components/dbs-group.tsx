@@ -3,22 +3,8 @@ import React from "react";
 import * as axios from "axios";
 import {ClockLoader} from "react-spinners";
 import {css} from "@emotion/core";
-
-
-export const HEADER_TITLE = {
-    luong: "Bao nhiêu ngày nữa có lương",
-    today: "Ngày hôm nay",
-    tetDuong: "Bao nhiêu ngày đến tết dương",
-    tetAm: "Bao nhiêu ngày đến tết âm lịch"
-};
-export const URL = {
-    getDatetime: "https://delta-group.tk/api/get-time",
-    // getDatetime: "http://localhost:3000/api/get-time",
-}
-export const CONFIG_DATA = {
-    ngayLuong: 5,
-    nextTetAm: new Date(2021, 1, 11)
-}
+import {HEADER_TITLE, URL, DBS_CONFIG_DATA} from "../config/constain";
+import {GetStaticProps} from "next";
 
 const override = css`
   display: block;
@@ -38,6 +24,12 @@ interface State {
     nextLuong: number;
     nextTetDuong: number;
     nextTetAm: number;
+}
+export const getStaticProps: GetStaticProps = async ({}) => {
+    return {
+        props: {},
+        revalidate: 10
+    }
 }
 
 export class DbsGroup extends React.Component<Props, State> {
@@ -107,7 +99,7 @@ export class DbsGroup extends React.Component<Props, State> {
             )
             const nextTetDuongMili = nextTetDuong.getTime() - this.state.datetime.getTime();
 
-            const nextTetAmMili = CONFIG_DATA.nextTetAm.getTime() - this.state.datetime.getTime();
+            const nextTetAmMili = DBS_CONFIG_DATA.nextTetAm.getTime() - this.state.datetime.getTime();
 
             this.setState({
                 nextLuong: Math.ceil(nextLuongMili / 1000 / 60 / 60 / 24),
@@ -232,9 +224,7 @@ export class DbsGroup extends React.Component<Props, State> {
                                 }
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         );

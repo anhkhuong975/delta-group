@@ -2,7 +2,6 @@ import {ActionTypes, HeaderState} from "./header.type";
 import {HeaderActions} from "./header.action";
 import {applyMiddleware, createStore} from "redux";
 import { composeWithDevTools } from 'redux-devtools-extension'
-import {useMemo} from "react";
 import thunkMiddleware from 'redux-thunk';
 import {createWrapper} from "next-redux-wrapper";
 
