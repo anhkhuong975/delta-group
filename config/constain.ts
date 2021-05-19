@@ -10,5 +10,5 @@ export const URL = {
 }
 export const DBS_CONFIG_DATA = {
     ngayLuong: 5,
-    nextTetAm: new Date(2021, 1, 11)
+    nextTetAm: new Date(2022, 2, 1)
 }
