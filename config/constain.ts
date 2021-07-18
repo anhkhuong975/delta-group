@@ -5,8 +5,8 @@ export const HEADER_TITLE = {
     tetDuong: "Bao nhiêu ngày đến tết dương",
     tetAm: "Bao nhiêu ngày đến tết âm lịch",
 };
-const API_ENDPOINT = 'http://localhost:3000/';
-// const API_ENDPOINT = 'https://delta-group.tk/';
+//const API_ENDPOINT = 'http://localhost:3000/';
+const API_ENDPOINT = 'https://delta-group.tk/';
 export const URL = {
     getDatetime: API_ENDPOINT + "api/get-time",
     getMember: API_ENDPOINT + "api/get-member",
