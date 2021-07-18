@@ -358,7 +358,7 @@ export class DbsGroup extends React.Component<Props, State> {
                                     <div>
                                     <InputGroup className="mb-3" size="sm">
                                         <FormControl placeholder="Thêm mới" value={this.state.newMemberInput} onChange={(event) => {this.setState({newMemberInput: event.target.value})}}/>
-                                        <Button id="button-addon2" size="sm" variant="danger" onClick={() => {this.setState({isShowDatePicker: true})}}>
+                                        <Button id="button-addon2" size="sm" variant="danger" onClick={() => {this.setState({isShowDatePicker: true})}} disabled={!this.state.newMemberInput || this.state.newMemberInput == ''}>
                                             Thêm
                                         </Button>
                                     </InputGroup>
