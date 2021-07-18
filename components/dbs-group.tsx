@@ -20,6 +20,14 @@ const override = css`
   background-color: rgba(255, 255, 255, 0.5);
 `;
 
+const override2 = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  transform: translateY(-20%);
+  background-color: rgba(255, 255, 255, 0.5);
+`;
+
 interface MemberCachly {
     _id: string;
     name: string;
@@ -61,7 +69,7 @@ export class DbsGroup extends React.Component<Props, State> {
             nextLuong: null,
             nextTetDuong: null,
             nextTetAm: null,
-            cachLyMembers: [],
+            cachLyMembers: null,
             selectedMember: null,
             selectedDatepicker: new Date(),
             isShowDatePicker: false,
@@ -177,6 +185,10 @@ export class DbsGroup extends React.Component<Props, State> {
                 }),
             });
             this.loadCachlyStorage();
+        } else {
+            this.setState({
+                cachLyMembers: [],
+            })
         }
     }
 
@@ -342,15 +354,17 @@ export class DbsGroup extends React.Component<Props, State> {
                         <div className="col-lg-12 d-flex justify-content-center">
                             <div className="card border-light mb-3 counter-wrap" style={{maxWidth: '18rem'}}>
                                 <div className="card-header p-1 text-white text-center bg-warning">{HEADER_TITLE.cachly}</div>
-                                <div className="d-flex justify-content-between p-2">
+                                <div className="d-flex justify-content-between pt-2 pr-2 pl-2">
                                     <div className="pr-2">
                                         <DropdownButton id="dropdown-item-button"
                                         title={this.state.selectedMember ? this.state.selectedMember.name : "Xem danh mục"}
                                         size="sm">
                                             {
+                                                this.state.cachLyMembers !== null ?
                                                 this.state.cachLyMembers.map(member => {
                                                     return <Dropdown.Item as="button" key={member._id} onClick={() => this.onChangeMember(member)}>{member.name} - <span className="text-warning">{member.startDate.toLocaleDateString()}</span></Dropdown.Item>
-                                                })
+                                                }) :
+                                                ''
                                             }
                                         </DropdownButton>
                                     </div>
@@ -366,31 +380,43 @@ export class DbsGroup extends React.Component<Props, State> {
                                     </InputGroup>
                                     </div>
                                 </div>
-                                <div className="card-body text-info text-center p-1">
-                                    {
-                                        this.state.selectedMember ?
-                                        Math.round((new Date().getTime() - this.state.selectedMember.startDate.getTime())/1000/60/60/24) >= 0 ?
-                                                <span>Đã được </span> 
-                                            :   <span>Sẽ cách ly sau </span>
-                                        : ""
-                                    }
-                                    <div className="counter-number">{
-                                        this.state.selectedMember && typeof this.state.selectedMember.startDate === 'object' ?
-                                        Math.abs(Math.round((new Date().getTime() - this.state.selectedMember.startDate.getTime())/1000/60/60/24)):
-                                        'Chọn danh mục'
-                                    }
-                                    {
-                                        this.state.selectedMember ? <span> ngày</span> : ""
-                                    }
+                                {
+                                    this.state.cachLyMembers === null ? 
+                                    <ClockLoader
+                                            css={override2}
+                                            size={50}
+                                            color={"#880088"}
+                                            loading={true}
+                                    /> :
+                                    <div>
+                                        <div className="card-body text-info text-center p-1">
+                                            {
+                                                this.state.selectedMember ?
+                                                Math.round((new Date().getTime() - this.state.selectedMember.startDate.getTime())/1000/60/60/24) >= 0 ?
+                                                        <span>Đã được </span> 
+                                                    :   <span>Sẽ cách ly sau </span>
+                                                : ""
+                                            }
+                                            <div className="counter-number">{
+                                                this.state.selectedMember && typeof this.state.selectedMember.startDate === 'object' ?
+                                                Math.abs(Math.round((new Date().getTime() - this.state.selectedMember.startDate.getTime())/1000/60/60/24)):
+                                                'Chọn danh mục'
+                                            }
+                                            {
+                                                this.state.selectedMember ? <span> ngày</span> : ""
+                                            }
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <Button className="w-100" id="button-addon2" size="sm" variant="danger"
+                                            disabled={!this.state.selectedMember}
+                                            onClick={() => {this.onResetCachly(this.state.selectedMember)}}>
+                                                Reset lại ngày cách ly
+                                            </Button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div>
-                                    <Button className="w-100" id="button-addon2" size="sm" variant="danger"
-                                    disabled={!this.state.selectedMember}
-                                    onClick={() => {this.onResetCachly(this.state.selectedMember)}}>
-                                        Reset lại ngày cách ly
-                                    </Button>
-                                </div>
+                                }
+                                
                             </div>
                         </div>
 
