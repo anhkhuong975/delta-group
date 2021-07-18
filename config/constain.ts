@@ -1,7 +1,7 @@
 export const HEADER_TITLE = {
     luong: "Bao nhiêu ngày nữa có lương",
     today: "Ngày hôm nay",
-    cachly: "Đếm ngày cách ly",
+    cachly: "Đếm ngày cách ly-giãn cách",
     tetDuong: "Bao nhiêu ngày đến tết dương",
     tetAm: "Bao nhiêu ngày đến tết âm lịch",
 };
