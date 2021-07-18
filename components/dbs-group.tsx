@@ -358,7 +358,9 @@ export class DbsGroup extends React.Component<Props, State> {
                                     <div>
                                     <InputGroup className="mb-3" size="sm">
                                         <FormControl placeholder="Thêm mới" value={this.state.newMemberInput} onChange={(event) => {this.setState({newMemberInput: event.target.value})}}/>
-                                        <Button id="button-addon2" size="sm" variant="danger" onClick={() => {this.setState({isShowDatePicker: true})}} disabled={!this.state.newMemberInput || this.state.newMemberInput == ''}>
+                                        <Button id="button-addon2" size="sm" variant="danger"
+                                        onClick={() => {this.setState({isShowDatePicker: true, isUpdate: false, titleDialog: this.state.newMemberInput});}}
+                                        disabled={!this.state.newMemberInput || this.state.newMemberInput == ''}>
                                             Thêm
                                         </Button>
                                     </InputGroup>
@@ -366,11 +368,15 @@ export class DbsGroup extends React.Component<Props, State> {
                                 </div>
                                 <div className="card-body text-info text-center p-1">
                                     {
-                                        this.state.selectedMember ? <span>Đã được </span> : ""
+                                        this.state.selectedMember ?
+                                        Math.round((new Date().getTime() - this.state.selectedMember.startDate.getTime())/1000/60/60/24) >= 0 ?
+                                                <span>Đã được </span> 
+                                            :   <span>Sẽ cách ly sau </span>
+                                        : ""
                                     }
                                     <div className="counter-number">{
                                         this.state.selectedMember && typeof this.state.selectedMember.startDate === 'object' ?
-                                        Math.round((new Date().getTime() - this.state.selectedMember.startDate.getTime())/1000/60/60/24):
+                                        Math.abs(Math.round((new Date().getTime() - this.state.selectedMember.startDate.getTime())/1000/60/60/24)):
                                         'Chọn danh mục'
                                     }
                                     {
