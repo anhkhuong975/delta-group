@@ -357,12 +357,16 @@ export class DbsGroup extends React.Component<Props, State> {
                                 <div className="d-flex justify-content-between pt-2 pr-2 pl-2">
                                     <div className="pr-2">
                                         <DropdownButton id="dropdown-item-button"
-                                        title={this.state.selectedMember ? this.state.selectedMember.name : "Xem danh mục"}
-                                        size="sm">
+                                        title={this.state.cachLyMembers === null ? "Loading..."
+                                            : this.state.selectedMember ? this.state.selectedMember.name : "Xem danh mục"}
+                                        size="sm" disabled={this.state.cachLyMembers === null}>
                                             {
                                                 this.state.cachLyMembers !== null ?
                                                 this.state.cachLyMembers.map(member => {
-                                                    return <Dropdown.Item as="button" key={member._id} onClick={() => this.onChangeMember(member)}>{member.name} - <span className="text-warning">{member.startDate.toLocaleDateString()}</span></Dropdown.Item>
+                                                    return <Dropdown.Item as="button" key={member._id}
+                                                    onClick={() => this.onChangeMember(member)}>{member.name} - <span
+                                                    className="text-warning">{member.startDate.toLocaleDateString()}</span>
+                                                    </Dropdown.Item>
                                                 }) :
                                                 ''
                                             }
