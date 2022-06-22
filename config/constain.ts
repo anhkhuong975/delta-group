@@ -15,7 +15,7 @@ export const URL = {
 };
 export const DBS_CONFIG_DATA = {
     ngayLuong: 5,
-    nextTetAm: new Date(2022, 2, 1)
+    nextTetAm: new Date(2023, 1, 22)
 };
 export const MONGODB_URI = "mongodb+srv://root:root@cluster0.0smmh.mongodb.net/gold-key?retryWrites=true&w=majority";
 export enum MONGODB_COLL {
